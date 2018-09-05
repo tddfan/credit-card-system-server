@@ -1,9 +1,15 @@
 package com.sapient.test.entity;
 
+import javax.persistence.*;
+
+@Entity
 public class CreditCard {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     public String name;
     public String cardNo;
+    @Column(name = "credit_limit")
     public double limit;
 
     public CreditCard(Long id, String name, String cardNo, double limit) {

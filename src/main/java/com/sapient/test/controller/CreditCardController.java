@@ -2,9 +2,10 @@ package com.sapient.test.controller;
 
 import com.sapient.test.entity.CreditCard;
 import com.sapient.test.entity.CreditCardBuilder;
+import com.sapient.test.entity.ValidationResult;
+import com.sapient.test.service.CreditCardService;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -14,19 +15,21 @@ import static java.util.Arrays.asList;
 @CrossOrigin
 public class CreditCardController {
 
+    private CreditCardService creditCardService;
+
+    public CreditCardController(CreditCardService creditCardService) {
+        this.creditCardService = creditCardService;
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody List<String> add(@RequestBody CreditCard creditCard) {
-        System.out.println(creditCard);
-        return asList("Test");
+    public @ResponseBody
+    ValidationResult add(@RequestBody CreditCard creditCard) {
+        return creditCardService.save(creditCard);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public @ResponseBody List<CreditCard> findAll() {
-        CreditCard c = new CreditCardBuilder().createCreditCard();
-        c.setCardNo("789742358");
-        c.setLimit(10l);
-        c.setName("Sanjay");
-        return asList(c);
+        return creditCardService.findAll();
     }
 
 }

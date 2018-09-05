@@ -1,4 +1,4 @@
-package com.sapient.test.creditcardsystemserver;
+package com.sapient.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
