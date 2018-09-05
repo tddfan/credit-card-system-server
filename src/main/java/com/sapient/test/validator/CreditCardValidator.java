@@ -5,6 +5,7 @@ import com.sapient.test.entity.ValidationResult;
 import com.sapient.test.entity.ValidationResultItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,10 @@ public class CreditCardValidator {
     private List<ValidationRule> rules;
 
     @Autowired
-    public CreditCardValidator(Luhn10ValidationRule luhn10ValidationRule) {
+    public CreditCardValidator(Luhn10ValidationRule luhn10ValidationRule, MinCardNoValidationRule minCardNoValidationRule) {
         rules = new ArrayList<>();
         rules.add(luhn10ValidationRule);
+        rules.add(minCardNoValidationRule);
     }
 
     public ValidationResult validate(CreditCard creditCard) {
@@ -43,6 +45,7 @@ public class CreditCardValidator {
     private ValidationResult getFailedResults(List<ValidationResultItem> validationResultItems) {
         List<String> messages = validationResultItems.stream()
                 .map(validationResultItem -> validationResultItem.getMessage())
+                .filter(msg -> !StringUtils.isEmpty(msg))
                 .collect(toList());
         return new ValidationResult(false, messages);
     }
