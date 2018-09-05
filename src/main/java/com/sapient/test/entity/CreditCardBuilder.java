@@ -5,6 +5,7 @@ public class CreditCardBuilder {
     private String name;
     private String cardNo;
     private double limit;
+    private double balance;
 
     public CreditCardBuilder setId(Long id) {
         this.id = id;
@@ -25,8 +26,14 @@ public class CreditCardBuilder {
         this.limit = limit;
         return this;
     }
+    public CreditCardBuilder setBalance(double balance) {
+        this.balance = balance;
+        return this;
+    }
+
+
 
     public CreditCard createCreditCard() {
-        return new CreditCard(id, name, cardNo, limit);
+        return new CreditCard(id, name, cardNo, limit, balance);
     }
 }

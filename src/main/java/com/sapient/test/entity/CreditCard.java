@@ -11,8 +11,9 @@ public class CreditCard {
     public String cardNo;
     @Column(name = "credit_limit")
     public double limit;
+    public double balance;
 
-    public CreditCard(Long id, String name, String cardNo, double limit) {
+    public CreditCard(Long id, String name, String cardNo, double limit, double balance) {
         this.id = id;
         this.name = name;
         this.cardNo = cardNo;
@@ -43,6 +44,14 @@ public class CreditCard {
 
     public void setLimit(double limit) {
         this.limit = limit;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     @Override

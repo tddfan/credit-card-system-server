@@ -27,7 +27,12 @@ public class CreditCardServiceTest {
 
     @Test
     public void testSave() {
-        CreditCard card = new CreditCardBuilder().setCardNo("18").setLimit(10d).setName("User").createCreditCard();
+        CreditCard card = new CreditCardBuilder()
+                .setCardNo("18")
+                .setLimit(10d)
+                .setBalance(0d)
+                .setName("User")
+                .createCreditCard();
         creditCardService.save(card);
         List<CreditCard> cards = creditCardService.findAll();
 
