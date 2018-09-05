@@ -1,6 +1,7 @@
 package com.sapient.test.controller;
 
 import com.sapient.test.entity.CreditCard;
+import com.sapient.test.entity.CreditCardBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -21,9 +22,9 @@ public class CreditCardController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public @ResponseBody List<CreditCard> findAll() {
-        CreditCard c = new CreditCard();
+        CreditCard c = new CreditCardBuilder().createCreditCard();
         c.setCardNo("789742358");
-        c.setLimit(BigDecimal.TEN);
+        c.setLimit(10l);
         c.setName("Sanjay");
         return asList(c);
     }

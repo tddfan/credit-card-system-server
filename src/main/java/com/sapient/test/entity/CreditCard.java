@@ -1,11 +1,19 @@
 package com.sapient.test.entity;
 
-import java.math.BigDecimal;
-
 public class CreditCard {
+    private Long id;
     public String name;
     public String cardNo;
-    public BigDecimal limit;
+    public double limit;
+
+    public CreditCard(Long id, String name, String cardNo, double limit) {
+        this.id = id;
+        this.name = name;
+        this.cardNo = cardNo;
+        this.limit = limit;
+    }
+    public CreditCard() {
+    }
 
     public String getName() {
         return name;
@@ -23,11 +31,11 @@ public class CreditCard {
         this.cardNo = cardNo;
     }
 
-    public BigDecimal getLimit() {
+    public double getLimit() {
         return limit;
     }
 
-    public void setLimit(BigDecimal limit) {
+    public void setLimit(double limit) {
         this.limit = limit;
     }
 
