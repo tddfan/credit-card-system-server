@@ -6,6 +6,7 @@ import com.sapient.test.validator.Luhn10ValidationRule;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 
@@ -35,14 +36,14 @@ public class Luhn10ValidationRuleTest {
     @Test
     public void testDoubleOfEvenIsMoreThen9() {
         boolean validationSuccess = getValidationStatusForCardNo("83");
-        assertFalse(validationSuccess);
+        assertTrue(validationSuccess);
     }
 
 
     @Test
     public void testOddDigitsCounts() {
         boolean validationSuccess = getValidationStatusForCardNo("166");
-        assertFalse(validationSuccess);
+        assertTrue(validationSuccess);
     }
 
     @Test

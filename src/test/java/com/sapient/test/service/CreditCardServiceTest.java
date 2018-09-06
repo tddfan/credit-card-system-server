@@ -28,7 +28,7 @@ public class CreditCardServiceTest {
     @Test
     public void testSave() {
         CreditCard card = new CreditCardBuilder()
-                .setCardNo("18")
+                .setCardNo("1111222233334444")
                 .setLimit(10d)
                 .setBalance(0d)
                 .setName("User")
