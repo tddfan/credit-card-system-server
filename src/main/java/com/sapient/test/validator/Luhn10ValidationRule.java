@@ -13,16 +13,16 @@ import static com.sapient.test.entity.ValidationResultItem.VALIDATION_ITEM_SUCCE
 @Component
 public class Luhn10ValidationRule implements ValidationRule<CreditCard> {
 
-    private static ValidationResultItem FAILURE = ValidationResultItem.failValidation("Invalid Credit Card Number");
+    private static ValidationResultItem FAILURE = ValidationResultItem.failWithMessage("Invalid Credit Card Number");
 
     @Override
     public ValidationResultItem validate(CreditCard creditCard) {
-        List<Integer> cardDigits = getCreditDigitsAsIntList(creditCard.getCardNo());
+        List<Integer> cardDigits = getCreditCardNoAsIntList(creditCard.getCardNo());
         int totalDigitsSum = getDigitsSum(cardDigits);
         return getValidationResult(totalDigitsSum);
     }
 
-    private List<Integer> getCreditDigitsAsIntList(String cardNo) {
+    private List<Integer> getCreditCardNoAsIntList(String cardNo) {
         cardNo = removeWhiteSpaces(cardNo);
         return Stream.of(cardNo.split(""))
                 .map(str -> Integer.parseInt(str))

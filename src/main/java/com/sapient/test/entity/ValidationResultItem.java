@@ -15,7 +15,7 @@ public class ValidationResultItem {
         this.success = success;
     }
 
-    public static ValidationResultItem failValidation(String message) {
+    public static ValidationResultItem failWithMessage(String message) {
         return new ValidationResultItem(message, false);
     }
 

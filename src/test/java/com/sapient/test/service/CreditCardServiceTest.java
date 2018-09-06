@@ -40,4 +40,5 @@ public class CreditCardServiceTest {
     }
     // Test for Invalid Card
     // Test validation Result message
+    // Test of properties
 }

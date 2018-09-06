@@ -22,7 +22,6 @@ public class CreditCardController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody
     ValidationResult add(@RequestBody CreditCard creditCard) {
         return creditCardService.save(creditCard);
     }
@@ -31,5 +30,4 @@ public class CreditCardController {
     public @ResponseBody List<CreditCard> findAll() {
         return creditCardService.findAll();
     }
-
 }

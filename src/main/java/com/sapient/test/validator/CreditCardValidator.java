@@ -19,10 +19,10 @@ public class CreditCardValidator {
     private List<ValidationRule> rules;
 
     @Autowired
-    public CreditCardValidator(Luhn10ValidationRule luhn10ValidationRule, MinCardNoValidationRule minCardNoValidationRule) {
+    public CreditCardValidator(Luhn10ValidationRule luhn10ValidationRule, CreditCardLengthValidationRule creditCardLengthValidationRule) {
         rules = new ArrayList<>();
         rules.add(luhn10ValidationRule);
-        rules.add(minCardNoValidationRule);
+        rules.add(creditCardLengthValidationRule);
     }
 
     public ValidationResult validate(CreditCard creditCard) {

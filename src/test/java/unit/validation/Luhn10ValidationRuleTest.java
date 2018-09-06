@@ -6,7 +6,6 @@ import com.sapient.test.validator.Luhn10ValidationRule;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 
@@ -19,46 +18,49 @@ public class Luhn10ValidationRuleTest {
         luhn10ValidationRule = new Luhn10ValidationRule();
     }
 
-    //Test for Null Entity
-    //Test for Empty Credit Card No
-    // Test for Null Credit Card No
-    // Test mix of 0 start and ends
-    // Test of Invalid Card numbers like negative number, special chars
 
     @Test
     public void testSingleDigit() {
-        assertFalse("Single Digit Should always fails validation",
-                luhn10ValidationRule.validate(getCreditCard("8")).isSuccess());
+        boolean validationSuccess = getValidationStatusForCardNo("8");
+        assertFalse(validationSuccess);
+    }
+
+
+    @Test
+    public void testDoubleOfEvenPosFromEndIsLessThen9() {
+        boolean validationSuccess = getValidationStatusForCardNo("15");
+        assertFalse(validationSuccess);
     }
 
     @Test
-    public void testDoubleOfEvenIsLessThen9_Invalid() {
-        assertFalse("card no where double of even position has value less then 9 and sum doesnt add up tp 10 should fail",
-                luhn10ValidationRule.validate(getCreditCard("15")).isSuccess());
+    public void testDoubleOfEvenIsMoreThen9() {
+        boolean validationSuccess = getValidationStatusForCardNo("83");
+        assertFalse(validationSuccess);
+    }
+
+
+    @Test
+    public void testOddDigitsCounts() {
+        boolean validationSuccess = getValidationStatusForCardNo("166");
+        assertFalse(validationSuccess);
     }
 
     @Test
-    public void testDoubleOfEvenIsLessThen9_Valid() {
-        assertTrue("card no where double of even position has value less then 9 and sum adds up tp 10 should pass",
-                luhn10ValidationRule.validate(getCreditCard("67")).isSuccess());
+    public void testEvenDigitsCounts() {
+        boolean validationSuccess = getValidationStatusForCardNo("5166");
+        assertFalse(validationSuccess);
     }
 
-    @Test
-    public void testDoubleOfEvenIsMoreThen9_Invalid() {
-        assertFalse("card no where double of even position has value more then 9 and sum doesnt add up tp 10 should fail",
-                luhn10ValidationRule.validate(getCreditCard("85")).isSuccess());
-    }
 
-    @Test
-    public void testDoubleOfEvenIsMoreThen9_Valid() {
-        assertTrue("card no where double of even position has value more then 9 and sum adds up tp 10 should pass",
-                luhn10ValidationRule.validate(getCreditCard("67")).isSuccess());
-    }
+    // Test for Null Entity
+    // Test for Empty Credit Card No
+    // Test for Null Credit Card No
+    // Test mix of 0 starts and ends
+    // Test of Invalid Card numbers like negative number, special chars
 
-    @Test
-    public void testOddDigitsCounts_Valid() {
-        assertTrue("Odd Digit Card no with valid Luhn 10 should should pass",
-                luhn10ValidationRule.validate(getCreditCard("166")).isSuccess());
+    private boolean getValidationStatusForCardNo(String cardNo) {
+        CreditCard card = getCreditCard(cardNo);
+        return luhn10ValidationRule.validate(card).isSuccess();
     }
 
     private CreditCard getCreditCard(String cardNo) {
